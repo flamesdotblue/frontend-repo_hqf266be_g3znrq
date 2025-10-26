@@ -3,32 +3,7 @@
 > vite
 
 
-  VITE v5.4.20  ready in 193 ms
+  VITE v5.4.20  ready in 211 ms
 
   ➜  Local:   http://localhost:3000/
   ➜  Network: http://172.20.3.186:3000/
-9:32:33 PM [vite] Pre-transform error: Transform failed with 1 error:
-/home/workspace/src/components/AboutSkills.jsx:75:18: ERROR: Expected "{" but found "["
-9:32:35 PM [vite] Internal server error: Transform failed with 1 error:
-/home/workspace/src/components/AboutSkills.jsx:75:18: ERROR: Expected "{" but found "["
-  Plugin: vite:esbuild
-  File: /home/workspace/src/components/AboutSkills.jsx:75:18
-  
-  Expected "{" but found "["
-  73 |              icon={<Code2 className="h-6 w-6 text-cyan-400" />}
-  74 |              title="Programming"
-  75 |              items=[
-     |                    ^
-  76 |                { name: 'C++', level: 85 },
-  77 |                { name: 'Python', level: 90 },
-  
-      at failureErrorWithLog (/home/workspace/node_modules/esbuild/lib/main.js:1472:15)
-      at /home/workspace/node_modules/esbuild/lib/main.js:755:50
-      at responseCallbacks.<computed> (/home/workspace/node_modules/esbuild/lib/main.js:622:9)
-      at handleIncomingPacket (/home/workspace/node_modules/esbuild/lib/main.js:677:12)
-      at Socket.readFromStdout (/home/workspace/node_modules/esbuild/lib/main.js:600:7)
-      at Socket.emit (node:events:508:28)
-      at addChunk (node:internal/streams/readable:559:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
-      at Readable.push (node:internal/streams/readable:390:5)
-      at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)

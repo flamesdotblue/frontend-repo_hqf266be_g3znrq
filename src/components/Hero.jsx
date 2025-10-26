@@ -1,136 +1,119 @@
-import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Rocket, Sparkles, Zap, Github, ExternalLink } from 'lucide-react';
 import Spline from '@splinetool/react-spline';
 
-const titles = [
-  'CSE Student',
-  'Full‑Stack Developer',
-  'Fintech & Systems Enthusiast',
-];
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.2 }
+  }
+};
 
-function useTypewriter(words, speed = 70, pause = 1200) {
-  const sequence = useMemo(() => words.flatMap((w) => [w]), [words]);
-  const [index, setIndex] = useState(0);
-  const [display, setDisplay] = useState('');
-  const [deleting, setDeleting] = useState(false);
-
-  useEffect(() => {
-    let timeout;
-    const current = sequence[index % sequence.length];
-
-    if (!deleting) {
-      if (display.length < current.length) {
-        timeout = setTimeout(() => setDisplay(current.slice(0, display.length + 1)), speed);
-      } else {
-        timeout = setTimeout(() => setDeleting(true), pause);
-      }
-    } else {
-      if (display.length > 0) {
-        timeout = setTimeout(() => setDisplay(current.slice(0, display.length - 1)), speed / 1.6);
-      } else {
-        setDeleting(false);
-        setIndex((i) => i + 1);
-      }
-    }
-
-    return () => clearTimeout(timeout);
-  }, [display, deleting, index, sequence, speed, pause]);
-
-  return display + (deleting ? '' : '▍');
-}
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 120, damping: 14 } }
+};
 
 export default function Hero() {
-  const typed = useTypewriter(titles);
-
   return (
-    <section id="home" className="relative min-h-screen w-full overflow-hidden bg-[#0a0a0f] text-white">
-      {/* 3D Spline scene */}
+    <section id="home" className="relative min-h-[92vh] w-full overflow-hidden">
+      {/* 3D Cover Background */}
       <div className="absolute inset-0">
-        <Spline
-          scene="https://prod.spline.design/G0i6ZIv4Vd1oW14L/scene.splinecode"
-          style={{ width: '100%', height: '100%' }}
-        />
+        <Spline scene="https://prod.spline.design/LU2mWMPbF3Qi1Qxh/scene.splinecode" style={{ width: '100%', height: '100%' }} />
       </div>
 
-      {/* Gradient overlays for mood - pointer events disabled so Spline stays interactive */}
-      <div className="pointer-events-none absolute inset-0 ">
-        <div className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-gradient-to-br from-fuchsia-500/30 via-indigo-500/20 to-sky-500/30 blur-3xl" />
-        <div className="absolute bottom-10 right-10 h-48 w-48 rounded-full bg-cyan-500/20 blur-2xl" />
-      </div>
+      {/* Decorative gradient veils that won't block interaction */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-fuchsia-500/20 via-violet-500/10 to-transparent blur-2xl" />
 
-      {/* Content */}
-      <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-6 text-center">
-        <motion.span
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1 text-sm backdrop-blur"
-        >
-          <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
-          Available for internships & projects
-        </motion.span>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="font-['Space_Grotesk'] text-4xl font-bold leading-tight sm:text-6xl"
-        >
-          Hi, I'm <span className="bg-gradient-to-r from-cyan-400 via-indigo-400 to-fuchsia-400 bg-clip-text text-transparent">Your Name</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="mt-3 text-lg text-white/80 sm:text-xl"
-        >
-          {typed}
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="mt-6 max-w-2xl text-balance text-white/70"
-        >
-          I design and build reliable web systems with a focus on performance, security, and great UX — blending clean code, product thinking, and a love for problem solving.
-        </motion.p>
-
+      {/* Foreground content */}
+      <div className="relative z-10 mx-auto flex min-h-[92vh] max-w-7xl flex-col items-center justify-center px-6 text-center text-white">
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="flex max-w-4xl flex-col items-center gap-6"
         >
-          <motion.a
-            whileHover={{ y: -2, scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            href="#projects"
-            className="group rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition hover:brightness-110"
+          <motion.div
+            variants={item}
+            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 backdrop-blur-md"
           >
-            View Projects
-          </motion.a>
-          <motion.a
-            whileHover={{ y: -2, scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            href="#contact"
-            className="rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white/90 backdrop-blur transition hover:bg-white/10"
+            <Sparkles className="h-4 w-4 text-yellow-300" />
+            <span className="text-xs tracking-wide text-white/90">Tech-forward • Motion-rich • Playfully modern</span>
+          </motion.div>
+
+          <motion.h1
+            variants={item}
+            className="font-['Manrope'] text-4xl font-extrabold leading-tight sm:text-5xl md:text-6xl"
           >
-            Contact Me
-          </motion.a>
+            Build bold, beautiful, and blazing-fast
+            <span className="relative ml-3 inline-block bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-amber-300 bg-clip-text text-transparent">
+              digital experiences
+            </span>
+          </motion.h1>
+
+          <motion.p
+            variants={item}
+            className="max-w-2xl text-base text-white/80 sm:text-lg"
+          >
+            I craft interactive interfaces with 3D flair, immersive motion, and production-grade engineering. From concept to polished product.
+          </motion.p>
+
+          <motion.div variants={item} className="flex flex-wrap items-center justify-center gap-3">
+            <motion.a
+              whileHover={{ y: -2, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              href="#projects"
+              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-fuchsia-500 to-indigo-500 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_30px_rgb(99_102_241_/_0.45)]"
+            >
+              <Rocket className="h-4 w-4" /> Explore Work
+            </motion.a>
+            <motion.a
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              href="https://github.com" target="_blank" rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-2.5 text-sm text-white/90 backdrop-blur-md hover:bg-white/15"
+            >
+              <Github className="h-4 w-4" /> GitHub
+            </motion.a>
+            <motion.a
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-2.5 text-sm text-white/90 backdrop-blur-md hover:bg-white/15"
+            >
+              <ExternalLink className="h-4 w-4" /> Contact
+            </motion.a>
+          </motion.div>
+
+          {/* Animated chips */}
+          <div className="relative mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+            {['Framer Motion', '3D Spline', 'Tailwind CSS', 'FastAPI', 'MongoDB', 'React'].map((label, i) => (
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 + i * 0.06, type: 'spring', stiffness: 120, damping: 16 }}
+                className="rounded-full border border-white/15 bg-black/30 px-3 py-1 text-xs text-white/80 backdrop-blur-md"
+              >
+                {label}
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
-        {/* Subtle scroll cue */}
+        {/* Floating spark accent */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.9 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-          className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-xs text-white/60 sm:flex"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 0.8, y: 0 }}
+          transition={{ delay: 1 }}
+          className="pointer-events-none absolute bottom-10 left-1/2 -translate-x-1/2"
         >
-          <span className="h-5 w-[1px] bg-gradient-to-b from-transparent via-white/60 to-transparent" />
-          Scroll
-          <span className="h-5 w-[1px] bg-gradient-to-b from-transparent via-white/60 to-transparent" />
+          <div className="flex items-center gap-2 text-xs text-white/60">
+            <Zap className="h-3.5 w-3.5 text-cyan-300" />
+            Scroll to explore
+          </div>
         </motion.div>
       </div>
     </section>

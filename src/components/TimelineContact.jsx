@@ -1,152 +1,98 @@
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Github, MapPin, FileText } from 'lucide-react';
+import { BookOpen, Mail, Linkedin, FileText, MapPin } from 'lucide-react';
 
 const timeline = [
   {
-    title: 'Bachelor of Technology in CSE',
-    org: 'Your University',
-    period: '2022 — Present',
-    details: 'Coursework: DSA, OS, DBMS, Networks, OOP, ML. Activities: Coding club lead, 2x hackathon finalist.'
+    title: 'Built motion-rich portfolio system',
+    place: 'Personal Project',
+    time: '2025',
+    desc: 'A reusable portfolio engine with 3D hero, dynamic theming, and framer-motion choreography.'
   },
   {
-    title: 'Software Engineering Intern',
-    org: 'Tech Startup',
-    period: 'Summer 2024',
-    details: 'Built internal dashboards, automated reporting, and improved API response times by ~30%.'
+    title: 'Frontend Engineer Internship',
+    place: 'Tech Startup',
+    time: '2024',
+    desc: 'Delivered interactive dashboards and component libraries with performance budgets.'
   },
   {
-    title: 'Open Source Contributor',
-    org: 'Various',
-    period: '2023 — Present',
-    details: 'Contributed features and fixes to frontend tooling and ML libraries used by thousands.'
-  },
-];
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08 }
+    title: 'B.S. in Computer Science',
+    place: 'University',
+    time: '2023',
+    desc: 'Specialized in HCI and systems — blending usability with robust engineering.'
   }
-};
-
-const item = {
-  hidden: { opacity: 0, y: 12 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.45 } }
-};
+];
 
 export default function TimelineContact() {
   return (
-    <section id="experience" className="relative w-full bg-[#0b0b12] py-24 text-white">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-10 top-10 h-32 w-32 rounded-full bg-cyan-500/10 blur-2xl" />
-        <div className="absolute bottom-10 right-16 h-48 w-48 rounded-full bg-fuchsia-500/10 blur-2xl" />
+    <section id="experience" className="relative w-full bg-gradient-to-b from-black to-[#06060b] py-20 text-white">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-cyan-500/10 via-fuchsia-500/5 to-transparent" />
       </div>
 
-      <div className="relative mx-auto max-w-6xl px-6">
-        <h2 className="font-['Space_Grotesk'] text-3xl font-bold sm:text-4xl">Experience & Education</h2>
+      <div className="relative mx-auto max-w-7xl px-6">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ type: 'spring', stiffness: 120, damping: 16 }} className="mb-12">
+          <p className="mb-2 text-sm uppercase tracking-widest text-white/60">Experience</p>
+          <h2 className="font-['Manrope'] text-3xl font-bold sm:text-4xl">Journey</h2>
+        </motion.div>
 
-        <div className="relative mt-10 grid grid-cols-1 gap-10 lg:grid-cols-5">
-          <motion.div
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="lg:col-span-3"
-          >
-            <div className="relative border-l border-white/15 pl-6">
-              {timeline.map((itemData, idx) => (
-                <motion.div
-                  key={itemData.title}
-                  variants={item}
-                  className="relative mb-10"
-                >
-                  <span className="absolute -left-[9px] top-1 block h-4 w-4 rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 shadow" />
-                  <h3 className="text-lg font-semibold">{itemData.title}</h3>
-                  <p className="text-sm text-white/70">{itemData.org} · {itemData.period}</p>
-                  <p className="mt-2 text-white/80">{itemData.details}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-2"
-          >
-            <ContactCard />
-          </motion.div>
+        <div className="relative">
+          <div className="absolute left-3 top-0 bottom-0 w-px bg-gradient-to-b from-fuchsia-400/60 via-violet-400/60 to-cyan-400/60" />
+          <div className="space-y-10">
+            {timeline.map((t, idx) => (
+              <motion.div
+                key={t.title}
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.6 }}
+                transition={{ delay: idx * 0.06, type: 'spring', stiffness: 140, damping: 18 }}
+                className="relative ml-8 rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl"
+              >
+                <div className="absolute -left-8 top-5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-fuchsia-500 to-cyan-500 text-white shadow-lg">
+                  <span className="h-2 w-2 rounded-full bg-white" />
+                </div>
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <h3 className="font-semibold">{t.title}</h3>
+                  <span className="text-xs text-white/60">{t.time}</span>
+                </div>
+                <p className="text-sm text-white/70">{t.place}</p>
+                <p className="mt-2 text-sm text-white/80">{t.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
-  );
-}
 
-function ContactCard() {
-  return (
-    <div id="contact" className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h3 className="font-['Space_Grotesk'] text-2xl font-semibold">Get in touch</h3>
-          <p className="mt-2 text-white/70">Have an opportunity, project, or question? Send a message.</p>
-        </div>
-        <a
-          href="#"
-          className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/90 transition hover:bg-white/10"
-        >
-          <FileText className="h-4 w-4" /> Resume
-        </a>
-      </div>
-
-      <form
-        className="mt-6 space-y-4"
-        onSubmit={(e) => {
-          e.preventDefault();
-          const form = e.currentTarget;
-          const data = new FormData(form);
-          const subject = encodeURIComponent(`Portfolio Inquiry from ${data.get('name')}`);
-          const body = encodeURIComponent(`${data.get('message')}\n\nReply to: ${data.get('email')}`);
-          window.location.href = `mailto:your.email@example.com?subject=${subject}&body=${body}`;
-        }}
-      >
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <input name="name" required placeholder="Your name" className="rounded-lg border border-white/10 bg-white/5 px-4 py-3 outline-none ring-indigo-500/30 placeholder:text-white/50 focus:ring-2" />
-          <input name="email" required type="email" placeholder="Email" className="rounded-lg border border-white/10 bg-white/5 px-4 py-3 outline-none ring-indigo-500/30 placeholder:text-white/50 focus:ring-2" />
-        </div>
-        <textarea name="message" required rows={4} placeholder="Message" className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 outline-none ring-indigo-500/30 placeholder:text-white/50 focus:ring-2" />
-        <motion.button
-          whileHover={{ y: -1, scale: 1.01 }}
-          whileTap={{ scale: 0.99 }}
-          type="submit"
-          className="w-full rounded-lg bg-gradient-to-r from-indigo-500 to-fuchsia-500 px-5 py-3 font-semibold text-white transition hover:brightness-110"
-        >
-          Send Message
-        </motion.button>
-
+        {/* Contact CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 8 }}
+          id="contact"
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2"
+          transition={{ type: 'spring', stiffness: 140, damping: 16 }}
+          className="mt-16 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-fuchsia-500/15 via-violet-600/10 to-cyan-500/15 p-6 backdrop-blur-xl"
         >
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 px-4 py-3 transition hover:bg-white/10">
-            <Linkedin className="h-5 w-5 text-cyan-400" /> LinkedIn
-          </a>
-          <a href="https://github.com" target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 px-4 py-3 transition hover:bg-white/10">
-            <Github className="h-5 w-5 text-fuchsia-400" /> GitHub
-          </a>
-          <div className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 px-4 py-3">
-            <Mail className="h-5 w-5 text-indigo-400" /> your.email@example.com
+          <div className="mb-4 flex items-center gap-3">
+            <BookOpen className="h-5 w-5 text-amber-300" />
+            <h3 className="font-semibold">Let’s build something remarkable</h3>
           </div>
-          <div className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 px-4 py-3">
-            <MapPin className="h-5 w-5 text-emerald-400" /> City, Country
+          <p className="max-w-3xl text-sm text-white/80">
+            I’m available for internships, freelance opportunities, and collaborations. If you have a product idea or need help polishing your interface with motion and 3D, let’s talk.
+          </p>
+          <div className="mt-5 flex flex-wrap items-center gap-3">
+            <a href="mailto:you@example.com" className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm text-white hover:bg-white/15">
+              <Mail className="h-4 w-4" /> Email
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-white/90 hover:bg-white/10">
+              <Linkedin className="h-4 w-4" /> LinkedIn
+            </a>
+            <a href="#" className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-white/90 hover:bg-white/10">
+              <FileText className="h-4 w-4" /> Resume
+            </a>
+            <span className="ml-auto inline-flex items-center gap-2 text-xs text-white/60">
+              <MapPin className="h-3.5 w-3.5" /> Remote / Open to relocate
+            </span>
           </div>
         </motion.div>
-      </form>
-    </div>
+      </div>
+    </section>
   );
 }
