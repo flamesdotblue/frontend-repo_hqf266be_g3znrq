@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Code2, Brain, Cpu, BookOpen, Sparkles, Rocket } from 'lucide-react';
+import { Code2, Brain, Cpu, BookOpen, Sparkles, Rocket, ShieldCheck, Gauge } from 'lucide-react';
 
 export default function AboutSkills() {
   return (
@@ -19,13 +19,21 @@ export default function AboutSkills() {
         >
           <h2 className="mb-4 font-['Space_Grotesk'] text-3xl font-bold sm:text-4xl">About Me</h2>
           <p className="text-white/70">
-            I'm a Computer Science & Engineering student passionate about building performant web apps, exploring machine learning, and solving challenging problems. I love crafting clean user experiences and writing maintainable code.
+            I'm a Computer Science & Engineering student focused on building performant, secure, and accessible web products. I enjoy working across the stack, translating user needs into reliable systems, and shipping polished interfaces.
           </p>
           <ul className="mt-6 space-y-3 text-white/80">
-            <li className="flex items-center gap-3"><Sparkles className="h-5 w-5 text-cyan-400" /> Strong foundation in algorithms and data structures</li>
-            <li className="flex items-center gap-3"><Rocket className="h-5 w-5 text-fuchsia-400" /> Interested in full‑stack and ML systems</li>
-            <li className="flex items-center gap-3"><BookOpen className="h-5 w-5 text-indigo-400" /> Active competitive programming and open‑source contributor</li>
+            <li className="flex items-center gap-3"><Sparkles className="h-5 w-5 text-cyan-400" /> Strong foundation in algorithms, data structures, and systems</li>
+            <li className="flex items-center gap-3"><ShieldCheck className="h-5 w-5 text-emerald-400" /> Security‑minded: authentication, input validation, and safe APIs</li>
+            <li className="flex items-center gap-3"><Gauge className="h-5 w-5 text-fuchsia-400" /> Performance: profiling, caching, and responsive UI patterns</li>
+            <li className="flex items-center gap-3"><BookOpen className="h-5 w-5 text-indigo-400" /> Actively learning ML for practical product use‑cases</li>
           </ul>
+
+          <div className="mt-6 grid grid-cols-2 gap-3 text-sm text-white/80">
+            <Badge>Web Security</Badge>
+            <Badge>REST APIs</Badge>
+            <Badge>Responsive Design</Badge>
+            <Badge>Unit Testing</Badge>
+          </div>
         </motion.div>
 
         <motion.div
@@ -50,47 +58,70 @@ export default function AboutSkills() {
       <div id="skills" className="relative mx-auto mt-20 max-w-6xl px-6">
         <div className="mb-10 flex items-center justify-between gap-4">
           <h3 className="font-['Space_Grotesk'] text-2xl font-semibold sm:text-3xl">Skills</h3>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70 backdrop-blur sm:flex"
+          >
+            <Rocket className="h-4 w-4 text-cyan-400" /> Fast learner, shipping with quality
+          </motion.div>
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <SkillCard
             icon={<Code2 className="h-6 w-6 text-cyan-400" />}
             title="Programming"
-            items={[
+            items=[
               { name: 'C++', level: 85 },
               { name: 'Python', level: 90 },
-              { name: 'JavaScript', level: 80 },
-            ]}
+              { name: 'JavaScript', level: 82 },
+            ]
           />
           <SkillCard
             icon={<Cpu className="h-6 w-6 text-fuchsia-400" />}
             title="Web & Systems"
-            items={[
-              { name: 'React', level: 85 },
-              { name: 'Node.js', level: 70 },
-              { name: 'Database', level: 75 },
-            ]}
+            items=[
+              { name: 'React', level: 86 },
+              { name: 'Node.js', level: 72 },
+              { name: 'Databases', level: 78 },
+            ]
           />
           <SkillCard
             icon={<Brain className="h-6 w-6 text-indigo-400" />}
             title="Machine Learning"
-            items={[
-              { name: 'ML Basics', level: 70 },
-              { name: 'Data Science', level: 65 },
-              { name: 'PyTorch', level: 55 },
-            ]}
+            items=[
+              { name: 'ML Fundamentals', level: 72 },
+              { name: 'Data Science', level: 68 },
+              { name: 'PyTorch', level: 58 },
+            ]
           />
           <SkillCard
             icon={<Code2 className="h-6 w-6 text-emerald-400" />}
             title="Tools"
-            items={[
-              { name: 'Git / GitHub', level: 85 },
-              { name: 'Docker', level: 60 },
-              { name: 'Linux', level: 75 },
-            ]}
+            items=[
+              { name: 'Git / GitHub', level: 88 },
+              { name: 'Docker', level: 62 },
+              { name: 'Linux', level: 78 },
+            ]
           />
         </div>
       </div>
     </section>
+  );
+}
+
+function Badge({ children }) {
+  return (
+    <motion.span
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4 }}
+      className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-3 py-1"
+    >
+      {children}
+    </motion.span>
   );
 }
 

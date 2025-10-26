@@ -4,29 +4,29 @@ import { Github, ExternalLink } from 'lucide-react';
 const projects = [
   {
     title: 'AI Note Summarizer',
-    desc: 'A web app that summarizes lecture notes using transformer models with clean, exportable outputs.',
-    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1200&auto=format&fit=crop',
+    desc: 'Summarizes lecture notes using transformers with exportable, shareable outputs and citation links.',
+    image: 'https://images.unsplash.com/photo-1684369586188-bad829e7c51f?ixid=M3w3OTkxMTl8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NjE1MTQzNDR8&ixlib=rb-4.1.0&w=1600&auto=format&fit=crop&q=80',
     github: 'https://github.com',
     demo: '#',
   },
   {
     title: 'Competitive Programming Kit',
-    desc: 'Template library and visualizer for graphs and DP with interactive problem notebooks.',
-    image: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1200&auto=format&fit=crop',
+    desc: 'Template library + visualizer for graphs and DP with interactive notebooks and test generators.',
+    image: 'https://images.unsplash.com/photo-1669023414162-5bb06bbff0ec?ixid=M3w3OTkxMTl8MHwxfHNlYXJjaHwxfHxDb21wZXRpdGl2ZSUyMFByb2dyYW1taW5nJTIwS2l0fGVufDB8MHx8fDE3NjE1MTQzNDV8MA&ixlib=rb-4.1.0&w=1600&auto=format&fit=crop&q=80',
     github: 'https://github.com',
     demo: '#',
   },
   {
     title: 'Personal Portfolio (this site)',
-    desc: 'Modern, animated and responsive portfolio with 3D Spline hero and slick interactions.',
+    desc: 'Modern, animated portfolio with Spline 3D hero, Framer Motion, and responsive design system.',
     image: 'https://images.unsplash.com/photo-1623697899817-2e067e4a4036?ixid=M3w3OTkxMTl8MHwxfHNlYXJjaHwxfHxQZXJzb25hbCUyMFBvcnRmb2xpbyUyMCUyOHRoaXMlMjBzaXRlJTI5fGVufDB8MHx8fDE3NjE1MTM0NDV8MA&ixlib=rb-4.1.0&w=1600&auto=format&fit=crop&q=80',
     github: 'https://github.com',
     demo: '#',
   },
   {
     title: 'Vision Assistant',
-    desc: 'Small CNN-powered app for classifying everyday objects on-device.',
-    image: 'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop',
+    desc: 'Lightweight CNN app for classifying everyday objects fully on-device with offline mode.',
+    image: 'https://images.unsplash.com/photo-1589652739890-77a7733b8a23?ixid=M3w3OTkxMTl8MHwxfHNlYXJjaHwxfHxWaXNpb24lMjBBc3Npc3RhbnR8ZW58MHwwfHx8MTc2MTUxNDM0Nnww&ixlib=rb-4.1.0&w=1600&auto=format&fit=crop&q=80',
     github: 'https://github.com',
     demo: '#',
   },
@@ -63,6 +63,7 @@ function ProjectCard({ title, desc, image, github, demo, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6, delay: index * 0.05 }}
+      whileHover={{ y: -6 }}
       className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] shadow-xl shadow-black/20"
     >
       <div className="relative aspect-video overflow-hidden">
@@ -72,7 +73,7 @@ function ProjectCard({ title, desc, image, github, demo, index }) {
       <div className="p-5">
         <h3 className="text-lg font-semibold">{title}</h3>
         <p className="mt-2 line-clamp-3 text-sm text-white/70">{desc}</p>
-        <div className="mt-4 flex items-center gap-3">
+        <div className="mt-4 flex flex-wrap items-center gap-3">
           <a
             href={github}
             target="_blank"

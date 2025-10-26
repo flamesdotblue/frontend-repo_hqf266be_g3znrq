@@ -4,8 +4,8 @@ import Spline from '@splinetool/react-spline';
 
 const titles = [
   'CSE Student',
-  'Developer',
-  'Problem Solver',
+  'Full‑Stack Developer',
+  'Fintech & Systems Enthusiast',
 ];
 
 function useTypewriter(words, speed = 70, pause = 1200) {
@@ -47,7 +47,7 @@ export default function Hero() {
       {/* 3D Spline scene */}
       <div className="absolute inset-0">
         <Spline
-          scene="https://prod.spline.design/wwTRdG1D9CkNs368/scene.splinecode"
+          scene="https://prod.spline.design/G0i6ZIv4Vd1oW14L/scene.splinecode"
           style={{ width: '100%', height: '100%' }}
         />
       </div>
@@ -94,7 +94,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="mt-6 max-w-2xl text-balance text-white/70"
         >
-          I build thoughtful digital experiences across web and machine learning — blending clean code, intuition, and a love for problem solving.
+          I design and build reliable web systems with a focus on performance, security, and great UX — blending clean code, product thinking, and a love for problem solving.
         </motion.p>
 
         <motion.div
@@ -103,12 +103,34 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.4 }}
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
-          <a href="#projects" className="group rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition hover:brightness-110">
+          <motion.a
+            whileHover={{ y: -2, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            href="#projects"
+            className="group rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition hover:brightness-110"
+          >
             View Projects
-          </a>
-          <a href="#contact" className="rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white/90 backdrop-blur transition hover:bg-white/10">
+          </motion.a>
+          <motion.a
+            whileHover={{ y: -2, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            href="#contact"
+            className="rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white/90 backdrop-blur transition hover:bg-white/10"
+          >
             Contact Me
-          </a>
+          </motion.a>
+        </motion.div>
+
+        {/* Subtle scroll cue */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.9 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
+          className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-xs text-white/60 sm:flex"
+        >
+          <span className="h-5 w-[1px] bg-gradient-to-b from-transparent via-white/60 to-transparent" />
+          Scroll
+          <span className="h-5 w-[1px] bg-gradient-to-b from-transparent via-white/60 to-transparent" />
         </motion.div>
       </div>
     </section>
